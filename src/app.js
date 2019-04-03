@@ -4,7 +4,7 @@ const hbs = require("hbs");
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 const app = express();
-
+const port = process.env.PORT || 3000;
 //Define paths for Express config
 const publicDir = path.join(__dirname, "../public");
 const viewPath = path.join(__dirname, "../templates/views");
@@ -43,7 +43,7 @@ app.get("/help", (req, res) => {
 app.get("/weather", (req, res) => {
   if (!req.query.address) {
     return res.send({
-      error: "No Address Prodivde"
+      error: "No Address Provided!!"
     });
   }
   geocode(
@@ -84,6 +84,6 @@ app.get("*", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server Started");
+app.listen(port, () => {
+  console.log("Server Started at port " + port);
 });
